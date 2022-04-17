@@ -44,6 +44,8 @@ check (status='start' or status='finish')
  foreign key (order_id) references orders(id) ,
  foreign key (product_id) references products(id) );
  
+ -- alter table products Alter created_at set DEFAULT CURRENT_TIMESTAMP ;
+ 
  insert into countries values ( 1 ,'SA' , 'Asia continent' ) ;
  insert into countries values ( 2 ,'UAE' , 'Asia continent' ) ;
  
@@ -63,3 +65,5 @@ check (status='start' or status='finish')
  select * from countries ;
  select * from order_productes  ;
  select * from products ; 
+ select * from users ;
+ select * from orders ;
