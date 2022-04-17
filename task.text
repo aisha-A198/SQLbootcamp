@@ -1,0 +1,65 @@
+create database store1;
+
+use store1 ;
+
+create table countries (
+codee int primary key , 
+name varchar(20) unique ,
+continent_name varchar(20) not null );
+
+create table users (
+id int primary key ,
+full_name varchar(20) ,
+email varchar(20) unique ,
+gender char(1) ,
+date_of_birth varchar(15) ,
+created_at datetime ,
+country_codee int ,
+foreign key (country_codee) references countries (codee) ,
+check(gender='f' or gender='m') );
+
+create table orders (
+id int primary key ,
+user_id int ,
+status varchar(6) ,
+created_at datetime ,
+foreign key (user_id) references users(id) ,
+check (status='start' or status='finish')
+ );
+ 
+ create table products (
+ id int primary key ,
+ name  varchar(10) not null ,
+ price int default 0 ,
+ status varchar(10) ,
+ created_at datetime ,
+ check(status='vaild' or status='expired' ) 
+ );
+ 
+ create table order_productes (
+ order_id int ,
+ product_id int ,
+ quantity int default 0 ,
+ primary key ( order_id , product_id) ,
+ foreign key (order_id) references orders(id) ,
+ foreign key (product_id) references products(id) );
+ 
+ insert into countries values ( 1 ,'SA' , 'Asia continent' ) ;
+ insert into countries values ( 2 ,'UAE' , 'Asia continent' ) ;
+ 
+ insert into users values ( 1 , 'Aesha Al-sayed' , 'aesha@hotmail.com' , 'f' , '1998-11' , '2022-05-01 20:05:00' , 1) ;
+ select * from users ;
+ 
+ insert into orders values (1 , 1 , 'finish' , '2022-05-01 20:05:00' ) ;
+ select * from orders;
+ 
+ insert into products values ( 1 , 'water' ,1,  'expired' , '2022-05-01 20:05:00' ) ;
+ insert into products values ( 2 , 'water' ,1.5,  'expired' , '2022-05-01 20:05:00' ) ;
+ 
+ insert into order_productes values (1 , 1, 3) ;
+ 
+ update countries set name='JWT' where name='UAE' ;
+ delete from products where id=2 ;
+ select * from countries ;
+ select * from order_productes  ;
+ select * from products ; 
